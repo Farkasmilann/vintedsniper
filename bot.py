@@ -7,7 +7,9 @@ WEBHOOKS = {
     "THE NORTH FACE": "https://discordapp.com/api/webhooks/1531247494556680243/DAqpUkexPS4ZbjJLNy5jicpEdS9pEQWcnTmEdJjbpnj4DApbJxUHdI8lh81w7npHl4Ix",
     "IPHONE": "https://discordapp.com/api/webhooks/1531247620683464747/zk0IKgd9VjLqHTO_kr3c3RwLZ97HC7f0itlW7SjY38JkzEvzHeS-1Sz-6p6sTpL8P7Hj",
     "LEGO": "https://discordapp.com/api/webhooks/1531247712656298098/KIAWVuLhf3snvoC8NNscUFMT6aiYOov8VaQO-syqRwZRr47k14_Hxk3VxNsTvatvaRju",
-    "NIKE": "https://discordapp.com/api/webhooks/1531247346954801193/e7paMQkjanfpaunpKXL74pcAxMEastdyNYW68pMw7lIZ6koL7KOnm7uFgUOwgQY0S7Lc"
+    "NIKE": "https://discordapp.com/api/webhooks/1531247346954801193/e7paMQkjanfpaunpKXL74pcAxMEastdyNYW68pMw7lIZ6koL7KOnm7uFgUOwgQY0S7Lc",
+    "ADIDAS": "https://discordapp.com/api/webhooks/1531391310936801443/pPY-QFN2vJyqUjCGtmPvGIQSUXnI7YTbAors1lv3VO1q1-W5BRf4JAKrjgEC4gxbgvh4",
+    "TOMMY HILFIGER": "https://discordapp.com/api/webhooks/1531391310936801443/pPY-QFN2vJyqUjCGtmPvGIQSUXnI7YTbAors1lv3VO1q1-W5BRf4JAKrjgEC4gxbgvh4"
 }
 
 SEARCHES = [
@@ -16,7 +18,9 @@ SEARCHES = [
     {"name": "THE NORTH FACE", "query": "the north face"},
     {"name": "IPHONE", "query": "iphone"},
     {"name": "LEGO", "query": "lego"},
-    {"name": "NIKE", "query": "nike"}
+    {"name": "NIKE", "query": "nike"},
+    {"name": "ADIDAS", "query": "adidas"},
+    {"name": "TOMMY HILFIGER", "query": "tommy hilfiger"}
 ]
 
 headers = {
@@ -77,20 +81,17 @@ def run_bot():
                 for item in reversed(new_found):
                     title = item.get("title", "Ismeretlen termék")
                     
-                    # Ár kiszedése biztonságosan a Vinted adatokból
                     price_data = item.get("price")
                     if isinstance(price_data, dict):
                         amount = price_data.get("amount", "")
                         currency_code = price_data.get("currency_code", "HUF")
                         price = f"{amount} {currency_code}"
                     else:
-                        # Ha esetleg stringként vagy számként jönne
                         currency = item.get("currency", "HUF")
                         price = f"{price_data} {currency}" if price_data else "Egyeztetés alatt"
 
                     item_url = item.get("url")
                     
-                    # Fotó kezelése
                     photos = item.get("photos", [])
                     photo_url = ""
                     if photos:
@@ -98,16 +99,14 @@ def run_bot():
                         if isinstance(first_photo, dict):
                             photo_url = first_photo.get("full_size_url") or first_photo.get("url", "")
                     
-                    # Eladó adatok (ha elérhetőek)
                     user = item.get("user", {})
                     username = user.get("login", "Ismeretlen eladó") if isinstance(user, dict) else "Ismeretlen eladó"
 
-                    # Szebb, dizájnosabb Discord Embed kártya
                     payload = {
                         "embeds": [{
                             "title": f"🔥 ÚJ {name} AJÁNLAT!",
                             "url": item_url,
-                            "color": 5814783, # Modern kék/lila árnyalat
+                            "color": 5814783,
                             "description": f"**[{title}]({item_url})**",
                             "fields": [
                                 {"name": "💰 Ár", "value": f"`{price}`", "inline": True},
