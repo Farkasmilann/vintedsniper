@@ -9,7 +9,7 @@ WEBHOOKS = {
     "LEGO": "https://discordapp.com/api/webhooks/1531247712656298098/KIAWVuLhf3snvoC8NNscUFMT6aiYOov8VaQO-syqRwZRr47k14_Hxk3VxNsTvatvaRju",
     "NIKE": "https://discordapp.com/api/webhooks/1531247346954801193/e7paMQkjanfpaunpKXL74pcAxMEastdyNYW68pMw7lIZ6koL7KOnm7uFgUOwgQY0S7Lc",
     "ADIDAS": "https://discordapp.com/api/webhooks/1531391310936801443/pPY-QFN2vJyqUjCGtmPvGIQSUXnI7YTbAors1lv3VO1q1-W5BRf4JAKrjgEC4gxbgvh4",
-    "TOMMY HILFIGER": "https://discordapp.com/api/webhooks/1531391310936801443/pPY-QFN2vJyqUjCGtmPvGIQSUXnI7YTbAors1lv3VO1q1-W5BRf4JAKrjgEC4gxbgvh4"
+    "TOMMY HILFIGER": "https://discordapp.com/api/webhooks/1531391481032609943/CUmgX0OjeU8V-ItJOwWMSr_xCP4pkbdpA0rw1t5B7Tf4IAYEiUJjmj5HAspsy4tvLoaK"
 }
 
 SEARCHES = [
@@ -31,7 +31,7 @@ headers = {
 }
 
 def run_bot():
-    print("Stílusos Vinted sniper bot elindult...")
+    print("Stílusos Vinted sniper bot elindult az összes márkával...")
     seen_items = {item["name"]: set() for item in SEARCHES}
 
     session = requests.Session()
